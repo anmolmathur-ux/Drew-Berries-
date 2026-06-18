@@ -1,6 +1,9 @@
 import React from "react";
 import { Users, Moon, ArrowRight, ShieldCheck, Leaf, HeartHandshake } from "lucide-react";
-
+import Oak from "../../public/oak-meadows-large.png";
+import SmallOak from '../../public/oak-meadows-cabin.png';
+import sunrise from '../../public/sunrise-pond.png';
+import pondservice from '../../public/pond-before-and-after.png';
 const CABINS = [
   {
     id: 'c1',
@@ -17,24 +20,57 @@ const CABINS = [
     capacity: 4,
     creditContribution: 180,
     imageUrl: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2070&auto=format&fit=crop'
-  }
+  },
+  {
+    id: 'c3',
+    name: 'Oak Meadow Cabin',
+    description: 'A simple timber frame cabin overlooking the north creek. Ideal for prayer, reflection, and quiet stewardship.',
+    capacity: 4,
+    creditContribution: 180,
+    imageUrl: Oak
+  },
+  {
+    id: 'c4',
+    name: 'The North Creek Cabin',
+    description: 'A simple timber frame cabin overlooking the north creek. Ideal for prayer, reflection, and quiet stewardship.',
+    capacity: 2,
+    creditContribution: 120,
+    imageUrl: SmallOak
+  },
+  {
+    id: 'c5',
+    name: 'The Pond ',
+    description: 'A simple timber frame cabin overlooking the north creek. Ideal for prayer, reflection, and quiet stewardship.',
+    capacity: 2,
+    creditContribution: 120,
+    imageUrl: sunrise
+  },
+  {
+    id: 'c6',
+    name: 'The Pond Service',
+    description: 'A simple timber frame cabin overlooking the north creek. Ideal for prayer, reflection, and quiet stewardship.',
+    capacity: 2,
+    creditContribution: 120,
+    imageUrl: pondservice
+  },
+
 ];
 
 const Cabins = () => {
   return (
     <div className="bg-[#fdfcf9] min-h-screen animate-in fade-in duration-1000 pb-32 font-sans selection:bg-[#4B5320]/10 overflow-x-hidden">
-      
+
       {/* Hero Header - Reflecting Private Association Aesthetic */}
       <section className="relative h-[65vh] md:h-[75vh] flex items-center justify-center">
         <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop" 
-            alt="Rural Oregon Forest" 
-            className="w-full h-full object-cover saturate-[0.3] brightness-[0.4]" 
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop"
+            alt="Rural Oregon Forest"
+            className="w-full h-full object-cover saturate-[0.3] brightness-[0.4]"
           />
           <div className="absolute inset-0 bg-linear-to-b from-stone-900/60 via-transparent to-[#fdfcf9]" />
         </div>
-        
+
         <div className="relative z-10 text-center px-6">
           <div className="flex items-center justify-center gap-3 mb-8">
             <div className="w-1.5 h-1.5 rounded-full bg-[#A3AD73]"></div>
@@ -54,17 +90,17 @@ const Cabins = () => {
 
       {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-[-10vh] relative z-20">
-        
+
         {/* Cabins Grid - Using Credit-Based Exchange Language */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           {CABINS.map((cabin, idx) => (
             <div key={cabin.id} className={`flex flex-col group ${idx % 2 !== 0 ? 'lg:mt-32' : ''}`}>
-              
+
               <div className="relative aspect-16/11 rounded-[48px] overflow-hidden shadow-2xl border-10 border-white transition-all duration-700">
-                <img 
-                  src={cabin.imageUrl} 
-                  alt={cabin.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-3000 ease-out" 
+                <img
+                  src={cabin.imageUrl}
+                  alt={cabin.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-3000 ease-out"
                 />
                 <div className="absolute top-8 left-8">
                   <div className="bg-[#4B5320] text-white px-5 py-2 rounded-full flex items-center gap-2 shadow-xl border border-white/10">
@@ -116,11 +152,11 @@ const Cabins = () => {
         {/* Requirements Focus: Mission and Hardship Support */}
         <section className="mt-48 bg-stone-900 rounded-[64px] p-12 md:p-24 text-white overflow-hidden relative">
           <Leaf className="absolute -top-12 -right-12 w-64 h-64 text-[#4B5320]/10 rotate-45" />
-          
+
           <div className="max-w-4xl relative z-10">
             <span className="text-[#A3AD73] text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">Association Values</span>
             <h3 className="text-4xl md:text-6xl font-serif mb-12 tracking-tight">Stewardship & <br /><span className="italic text-stone-400">Mutual Care</span></h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               <div className="space-y-4">
                 <HeartHandshake className="text-[#A3AD73]" size={32} />

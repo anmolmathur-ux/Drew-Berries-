@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router"; 
+import { Link, useLocation } from "react-router";
 import { Menu, X, Leaf } from "lucide-react";
+import logo from '/public/logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   // Updated closeMenu to also force scroll to top
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -50,11 +51,11 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-stone-100/60">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between h-20">
-          
+
           <div className="flex items-center">
             <Link to="/" onClick={handleNavLinkClick} className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-[#4B5320] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#4B5320]/20 group-hover:rotate-6 transition-transform">
-                <Leaf size={20} />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white  group-hover:rotate-6 transition-transform">
+                <img src={logo} alt="Logo" className="w-[100px] h-[100px] object-contain" />
               </div>
               <div className="flex flex-col items-start leading-none">
                 <span className="text-xl font-serif font-black text-[#2D2A26] tracking-tighter">
@@ -69,9 +70,9 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.path} 
+              <Link
+                key={link.name}
+                to={link.path}
                 className={navLinkClasses(link.path)}
                 onClick={handleNavLinkClick}
               >
@@ -106,11 +107,10 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               onClick={handleNavLinkClick}
-              className={`block w-full text-left px-4 py-3 text-sm font-sans font-bold uppercase tracking-widest rounded-xl transition-all ${
-                isActive(link.path)
-                  ? "text-[#4B5320] bg-[#4B5320]/5"
-                  : "text-stone-500 hover:text-[#4B5320] hover:bg-stone-50"
-              }`}
+              className={`block w-full text-left px-4 py-3 text-sm font-sans font-bold uppercase tracking-widest rounded-xl transition-all ${isActive(link.path)
+                ? "text-[#4B5320] bg-[#4B5320]/5"
+                : "text-stone-500 hover:text-[#4B5320] hover:bg-stone-50"
+                }`}
             >
               {link.name}
             </Link>

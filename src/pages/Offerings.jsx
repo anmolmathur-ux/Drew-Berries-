@@ -8,37 +8,97 @@ import {
   Sprout,
   GraduationCap,
 } from "lucide-react";
+import Arugula from "../../public/offerings/arugula.png"
+import Kale from "../../public/offerings/kale.png"
+import Beets from "../../public/offerings/beet.png"
+import Broccoli from "../../public/offerings/broccoli.png"
+import Cress from "../../public/offerings/cress.png"
+import Peas from "../../public/offerings/peas.png"
+import Radish from "../../public/offerings/radish.png"
+import Sunflower from "../../public/offerings/sunflower.png"
+import BeeKeeping from "../../public/offerings/bee-keeping.png"
 
 const OFFERINGS = [
   {
     id: "1",
-    name: "Seasonal Berry Harvest",
+    name: "Arugula",
+    description:
+      "Arugula is a peppery green that is packed with nutrients.",
+    creditValue: 3,
+    category: "Produce",
+    imageUrl: Arugula,
+  },
+  {
+    id: "2",
+    name: "Beet",
+    description:
+      "Beets are a root vegetable that are packed with nutrients.",
+    creditValue: 3,
+    category: "Pantry",
+    imageUrl: Beets,
+  },
+  {
+    id: "3",
+    name: "Broccoli",
+    description:
+      "Broccoli is a cruciferous vegetable that is packed with nutrients.",
+    creditValue: 3,
+    category: "Produce",
+    imageUrl: Broccoli,
+  },
+  {
+    id: "4",
+    name: "Cress",
+    description:
+      "Cress is a peppery green that is packed with nutrients.",
+    creditValue: 3,
+    category: "Pantry",
+    imageUrl: Cress,
+  },
+  {
+    id: "5",
+    name: "Peas",
+    description:
+      "Peas are a legume that are packed with nutrients.",
+    creditValue: 3,
+    category: "Pantry",
+    imageUrl: Peas,
+  },
+  {
+    id: "6",
+    name: "Radishes",
+    description:
+      "Radishes are a root vegetable that are peppery and crisp.",
+    creditValue: 3,
+    category: "Produce",
+    imageUrl: Radish,
+  },
+  {
+    id: "7",
+    name: "Sunflower",
+    description:
+      "Sunflowers are a bright and cheerful flower that are a great addition to any garden.",
+    creditValue: 3,
+    category: "Produce",
+    imageUrl: Sunflower,
+  },
+  {
+    id: "8",
+    name: "Kale",
     description:
       "A voluntary exchange of freshly harvested seasonal berries from our Oregon fields, supporting sustainable food production and land stewardship.",
     creditValue: 12,
     category: "Produce",
-    imageUrl:
-      "https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: Kale,
   },
   {
-    id: "2",
-    name: "Homestead Sourdough Starter",
-    description:
-      "Heritage culture shared for member kitchen cultivation, fostering shared resources, personal responsibility, and mutual aid.",
-    creditValue: 5,
-    category: "Pantry",
-    imageUrl:
-      "https://images.unsplash.com/photo-1589415392060-ad6a6a0bc912?auto=format&fit=crop&q=80&w=1000",
-  },
-  {
-    id: "3",
+    id: "9",
     name: "Beekeeping Consultation",
     description:
-      "One-on-one session sharing knowledge on sustainable apiary management, environmental stewardship, and community-based learning.",
+      "Expert guidance on establishing and maintaining healthy beehives, covering swarm management, honey harvesting, and pollinator conservation practices.",
     creditValue: 45,
     category: "Education",
-    imageUrl:
-      "https://images.unsplash.com/photo-1587334274328-64186a80aeee?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: BeeKeeping,
   },
 ];
 
@@ -111,27 +171,28 @@ const Offerings = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap gap-3 mb-20 justify-center">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border ${
-                filter === cat
-                  ? "bg-[#4B5320] text-white border-[#4B5320] shadow-xl shadow-[#4B5320]/20"
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-max px-4">
+          <div className="flex flex-wrap gap-3 justify-center bg-white/80 backdrop-blur-md p-3 rounded-full shadow-2xl border border-stone-200/50">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 border ${filter === cat
+                  ? "bg-[#4B5320] text-white border-[#4B5320] shadow-lg shadow-[#4B5320]/20"
                   : "bg-white text-stone-400 hover:text-[#4B5320] border-stone-100"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Offerings Grid - Based on Credit Exchange System */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {filteredOfferings.map((item) => (
             <div key={item.id} className="group flex flex-col">
-              <div className="relative aspect-4/5 rounded-[48px] overflow-hidden shadow-2xl transition-all duration-700 group-hover:shadow-[#4B5320]/10 border-8 border-white bg-stone-100">
+              <div className="relative aspect-square rounded-full overflow-hidden shadow-2xl transition-all duration-700 group-hover:shadow-[#4B5320]/10 border-8 border-white bg-stone-100">
                 <img
                   src={item.imageUrl}
                   alt={item.name}
@@ -142,9 +203,11 @@ const Offerings = () => {
                   }}
                 />
                 <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors" />
-                <div className="absolute top-8 left-8">
-                  <div className="bg-white/90 backdrop-blur-md text-[#4B5320] px-4 py-1.5 rounded-full border border-stone-100 shadow-sm">
-                    <span className="text-[9px] font-black uppercase tracking-widest">
+
+                {/* Category card tab centered inside the card over the middle of the image section */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+                  <div className="bg-white/90 backdrop-blur-md text-[#4B5320] px-5 py-2 rounded-full border border-stone-100/50 shadow-md">
+                    <span className="text-[9px] font-black uppercase tracking-widest whitespace-nowrap">
                       {item.category}
                     </span>
                   </div>

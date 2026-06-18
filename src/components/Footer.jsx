@@ -6,13 +6,19 @@ function Footer() {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "smooth",
     });
   };
 
   return (
     <footer className="bg-[#4b5320] text-stone-200 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/*logo*/}
+        <img
+          src="/logo.png"
+          alt="logo"
+          className="w-16 h-16"
+        />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Mission */}
           <div className="col-span-1 md:col-span-2">
@@ -35,9 +41,9 @@ function Footer() {
             </h4>
             <ul className="space-y-4">
               <li>
-                <Link 
-                  to="/" 
-                  onClick={handleScrollToTop} 
+                <Link
+                  to="/"
+                  onClick={handleScrollToTop}
                   className="hover:text-white transition-colors"
                 >
                   Home

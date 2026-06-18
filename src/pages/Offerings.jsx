@@ -114,7 +114,7 @@ const Offerings = () => {
 
   return (
     <div className="bg-[#FDFBF7] min-h-screen animate-in fade-in duration-1000 pb-32 font-sans selection:bg-[#4B5320]/10 overflow-x-hidden">
-      {/* Editorial Header - Reflecting Drusus Foundation Identity */}
+      {/* Editorial Header */}
       <section className="relative pt-10 pb-20 px-6 border-b border-stone-100 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-8">
@@ -136,7 +136,7 @@ const Offerings = () => {
       </section>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-16">
-        {/* Purpose Statement - Based on Client Context */}
+        {/* Purpose Statement */}
         <div className="mb-24 p-10 bg-[#4B5320]/5 rounded-[40px] border border-[#4B5320]/10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -188,59 +188,91 @@ const Offerings = () => {
           </div>
         </div>
 
-        {/* Offerings Grid - Based on Credit Exchange System */}
+        {/* Offerings Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {filteredOfferings.map((item) => (
-            <div key={item.id} className="group flex flex-col">
-              <div className="relative aspect-square rounded-full overflow-hidden shadow-2xl transition-all duration-700 group-hover:shadow-[#4B5320]/10 border-8 border-white bg-stone-100">
-                <img
-                  src={item.imageUrl}
-                  alt={item.name}
-                  className="w-full h-full object-cover saturate-[0.6] group-hover:saturate-100 group-hover:scale-105 transition-all duration-2000 ease-out"
-                  onError={(e) => {
-                    e.target.src =
-                      "https://images.unsplash.com/photo-1500628550463-c8881a54d4d4?q=80&w=1000&auto=format&fit=crop";
-                  }}
-                />
-                <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors" />
+          {filteredOfferings.map((item) => {
+            const isLastCard = item.id === "9";
 
-                {/* Category card tab centered inside the card over the middle of the image section */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-                  <div className="bg-white/90 backdrop-blur-md text-[#4B5320] px-5 py-2 rounded-full border border-stone-100/50 shadow-md">
-                    <span className="text-[9px] font-black uppercase tracking-widest whitespace-nowrap">
-                      {item.category}
-                    </span>
+            return (
+              <div key={item.id} className="group flex flex-col">
+
+                {/* 1. SEPARATED CONDITIONAL TEMPLATE VIEWS TO ENSURE NO RENDER OVERRIDES */}
+                {!isLastCard ? (
+                  /* Standard display frame template for pre-cropped illustration cards 1-8 */
+                  <div className="relative w-full aspect-[1.35/1] bg-transparent">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="w-full h-full object-cover saturate-[0.85] group-hover:saturate-100 transition-all duration-500 ease-out"
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          "https://images.unsplash.com/photo-1500628550463-c8881a54d4d4?q=80&w=1000&auto=format&fit=crop";
+                      }}
+                    />
+
+                    {/* Category tag bubble */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10">
+                      <div className="bg-white/95 backdrop-blur-md text-[#4B5320] px-4 py-1.5 rounded-full border border-stone-100/40 shadow-xs">
+                        <span className="text-[9px] font-black uppercase tracking-widest whitespace-nowrap">
+                          {item.category}
+                        </span>
+                      </div>
+                    </div>
                   </div>
+                ) : (
+                  /* Hardcoded mathematical oval layer container specifically for the 9th image */
+                  <div className="relative w-full aspect-[1.35/1] rounded-full overflow-hidden isolate border-4 border-white shadow-xl bg-stone-100">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="w-full h-full object-cover saturate-[0.85] group-hover:saturate-100 transition-all duration-500 ease-out"
+                      onError={(e) => {
+                        e.currentTarget.src =
+                          "https://images.unsplash.com/photo-1500628550463-c8881a54d4d4?q=80&w=1000&auto=format&fit=crop";
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-stone-900/[0.01] group-hover:bg-transparent transition-colors pointer-events-none rounded-full" />
+
+                    {/* Category tag bubble */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10">
+                      <div className="bg-white/95 backdrop-blur-md text-[#4B5320] px-4 py-1.5 rounded-full border border-stone-100/40 shadow-xs">
+                        <span className="text-[9px] font-black uppercase tracking-widest whitespace-nowrap">
+                          {item.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Card descriptions and text blocks layout properties */}
+                <div className="mt-8 px-2 grow flex flex-col">
+                  <div className="flex justify-between items-start gap-4 mb-4">
+                    <h2 className="text-2xl md:text-3xl font-serif text-stone-900 tracking-tight leading-tight">
+                      {item.name}
+                    </h2>
+                    <div className="text-right shrink-0">
+                      <span className="text-2xl font-serif italic text-[#4B5320] block">
+                        {item.creditValue}
+                      </span>
+                      <span className="text-[8px] font-black uppercase tracking-widest text-stone-400">
+                        Exchange Credits
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-stone-500 text-base leading-relaxed font-serif italic mb-8 border-l-2 border-[#4B5320]/10 pl-6 grow">
+                    {item.description}
+                  </p>
+                  <button className="w-full bg-[#4B5320] text-white py-5 rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] shadow-lg shadow-[#4B5320]/10 hover:bg-stone-900 transition-all flex items-center justify-center gap-3 group/btn">
+                    Request Participation
+                    <ArrowRight
+                      size={16}
+                      className="group-hover/btn:translate-x-1 transition-transform"
+                    />
+                  </button>
                 </div>
               </div>
-
-              <div className="mt-8 px-4 grow flex flex-col">
-                <div className="flex justify-between items-start gap-4 mb-4">
-                  <h2 className="text-2xl md:text-3xl font-serif text-stone-900 tracking-tight leading-tight">
-                    {item.name}
-                  </h2>
-                  <div className="text-right shrink-0">
-                    <span className="text-2xl font-serif italic text-[#4B5320] block">
-                      {item.creditValue}
-                    </span>
-                    <span className="text-[8px] font-black uppercase tracking-widest text-stone-400">
-                      Exchange Credits
-                    </span>
-                  </div>
-                </div>
-                <p className="text-stone-500 text-base leading-relaxed font-serif italic mb-8 border-l-2 border-[#4B5320]/10 pl-6 grow">
-                  {item.description}
-                </p>
-                <button className="w-full bg-[#4B5320] text-white py-5 rounded-2xl font-black uppercase tracking-[0.3em] text-[11px] shadow-lg shadow-[#4B5320]/10 hover:bg-stone-900 transition-all flex items-center justify-center gap-3 group/btn">
-                  Request Participation
-                  <ArrowRight
-                    size={16}
-                    className="group-hover/btn:translate-x-1 transition-transform"
-                  />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Association Stewardship & Hardship Notice */}

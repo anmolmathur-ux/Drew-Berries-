@@ -1,10 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router"; // Fixed import for standard consistency
-import Footer from "../components/Footer";
+import { X } from "lucide-react"; // Optional: Install lucide-react or use a custom SVG for the close button
+import logo from "../../public/popup.png"; // Adjust this path to where your logo file is saved
 
 const Home = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    // Check if the popup has already been shown in this session
+    const hasSeenPopup = sessionStorage.getItem("hasSeenComingSoonPopup");
+
+    if (!hasSeenPopup) {
+      setShowPopup(true);
+      // Set the flag so it doesn't pop up again during this session
+      sessionStorage.setItem("hasSeenComingSoonPopup", "true");
+    }
+  }, []);
+
   return (
     <div className="bg-[#fdfcf9]">
+      {/* --- COMING SOON POPUP MODAL --- */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md transition-all duration-300">
+          <div className="relative bg-white border border-stone-200 rounded-3xl max-w-md w-full p-8 text-center shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1 rounded-full hover:bg-stone-100 transition-colors"
+              aria-label="Close popup"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Logo Container */}
+            <div className="mb-6 flex justify-center">
+              <img
+                src={logo}
+                alt="Sam's Creekside Cafe Logo"
+                className="w-48 h-48 object-contain drop-shadow-md rounded-full border-4 border-[#4B5320]/20 p-1"
+              />
+            </div>
+
+            {/* Content & Coming Soon Stamp */}
+            <div className="inline-block bg-[#4B5320] text-white px-4 py-1 rounded-full text-xs font-sans font-black uppercase tracking-[0.25em] mb-4">
+              Coming Soon
+            </div>
+
+            <h3 className="text-2xl font-serif text-stone-800 mb-2 font-black">
+              Sam's Creekside Cafe
+            </h3>
+            <p className="text-stone-600 font-sans text-sm leading-relaxed mb-6">
+              We are brewing something fresh at Drew's Berries & More. Join our membership network below to stay updated on our official opening launch.
+            </p>
+
+            {/* Action Call */}
+            <button
+              onClick={() => setShowPopup(false)}
+              className="w-full bg-[#4B5320] text-white py-3.5 rounded-xl font-sans font-bold uppercase tracking-widest hover:bg-[#3d441a] transition-all text-sm shadow-lg active:scale-[0.98]"
+            >
+              Explore the Site
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* --- HERO SECTION --- */}
       <section className="relative h-[90vh] flex items-center overflow-hidden bg-stone-900">
         <div className="absolute inset-0 z-0">
           <img
@@ -71,6 +133,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* --- STEWARDSHIP SECTION --- */}
       <section className="relative py-32 overflow-hidden border-b border-stone-100">
         {/* Background Texture Layers */}
         <div className="absolute inset-0 z-0">
@@ -187,22 +250,20 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* --- MEMBERSHIP FOOTER CALL --- */}
       <section className="bg-[#fdfcf9] py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* The Card Container with Background Image */}
           <div className="relative overflow-hidden rounded-4xl shadow-2xl">
-            {/* 1. Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
               <img
                 src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=2000"
                 alt="Harvest Background"
                 className="w-full h-full object-cover"
               />
-              {/* Modern Gradient: Darks on the left for text, fades to reveal image on the right */}
               <div className="absolute inset-0 bg-linear-to-r from-stone-900 via-stone-900/80 to-transparent md:to-stone-900/20"></div>
             </div>
 
-            {/* 2. Content Layer */}
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between p-12 md:p-20">
               <div className="mb-10 md:mb-0 text-center md:text-left max-w-xl">
                 <h2 className="text-4xl md:text-5xl font-serif text-white mb-6 leading-tight tracking-tight">
@@ -228,7 +289,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* 3. Subtle Decorative Flare */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full -mr-16 -mt-16"></div>
           </div>
         </div>
